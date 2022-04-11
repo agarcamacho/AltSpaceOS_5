@@ -72,7 +72,7 @@ export default class AlarmTimer {
 	private materialTimer: MRE.Asset;
 
 	constructor(private context: MRE.Context, private params: MRE.ParameterSet, private baseUrl: string) {
-		this.initialTimerCount = parseInt(getParameterLastValue(params, 'c', '10'));
+		this.initialTimerCount = parseInt(getParameterLastValue(params, 'c', '150'));
 		this.increment = parseInt(getParameterLastValue(params, 'i', '60'));
 		this.viewableByModsOnly = getBooleanOption(params, 'mo', false);
 		this.alarmSoundPath = getParameterLastValue(params, 'as', 'Pitido.ogg');
@@ -130,9 +130,9 @@ export default class AlarmTimer {
 		this.context.onUserJoined((user) => this.userJoined(user));
 		this.context.onUserLeft((user) => this.userLeft(user));	
 		let alarmSoundUri = decodeURIComponent(this.alarmSoundPath);
-		if( !alarmSoundUri.startsWith("http://") && !alarmSoundUri.startsWith("https://") ) {
+		/*if( !alarmSoundUri.startsWith("http://") && !alarmSoundUri.startsWith("https://") ) {
 			alarmSoundUri = `${this.baseUrl}/${this.alarmSoundPath}`;
-		}
+		}*/
 		this.alarmSound = this.assets.createSound(
 			'alarmSound',
 			{ uri: alarmSoundUri });
